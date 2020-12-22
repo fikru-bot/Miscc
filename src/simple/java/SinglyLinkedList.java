@@ -40,8 +40,84 @@ public class SinglyLinkedList {
             tail = newNode;    
         }    
     }    
-        
+       
+  //addNode to the end
+   public void addToEnd(int data) {
+    	Node n = new Node(data);
+    	if(head == null) {
+    		head = n;
+    	}
+    	else {
+    		Node curr = head;
+    		while(curr.next != null) {
+    			curr = curr.next;
+    		}
+    		curr.next = n;
+    	}
+    }
     
+   //addNode to the end
+   public void addToStart(int data) {
+	   Node m = new Node(data);
+	   m.next = head;
+	   head = m;
+   }
+   //addNode in between the end
+   public void addAfter(int insertAfter, int data) {
+	   Node cur = head;
+	   
+	   while(cur != null) {
+		   if(cur.data == insertAfter) {
+			   Node v = new Node(data);
+			   v.next = cur.next;
+			   cur.next = v;
+			   break;
+		   }
+	   }
+	   cur = cur.next;
+   }
+   
+   //delete node at the end
+   public Node deleteAtTheEnd() {
+	   Node cu = head;
+	   if(cu == null || cu.next == null) {
+		   head = null;
+		   return cu;
+	   }
+	   Node nextNode = cu.next;
+	   while(cu.next != null) {
+		   if(nextNode.next == null) {
+			   cu.next = null;
+		   }
+		   cu = nextNode;
+		   nextNode = nextNode.next;
+	   }
+	   return cu;
+   }
+   // delete node at start
+   public Node deleteStart() {
+	   if(head != null) {
+		   Node toDelete = head;
+		   head = head.next;
+		   return toDelete;
+	   }
+	   return null;
+	   
+   }
+   //delete node in between 
+   public Node deleteAfter(int data) {
+	   Node curre = head;
+	   Node toDelet = null;
+	   while(curre != null) {
+		   if(curre.data == data && curre.next != null) {
+			   toDelet = curre.next;
+			   curre.next = toDelet.next;
+			   break;
+		   }
+		   curre = curre.next;
+	   }
+	   return toDelet;
+   }
     //display() will display all the nodes present in the list    
     public void display() {    
         //Node current will point to head    
@@ -58,17 +134,20 @@ public class SinglyLinkedList {
             current = current.next;             
         }    
         System.out.println();    
-    }    
+    }  
+    
+   
         
     public static void main(String[] args) {    
             
         SinglyLinkedList sList = new SinglyLinkedList();    
             
-        //Add nodes to the list    
+        //Add nodes to the list  
+     
         sList.addNode(1);    
         sList.addNode(2);    
-        sList.addNode(3);    
-        sList.addNode(4);    
+        sList.addToEnd(3);
+      
             
         //Displays the nodes present in the list    
         sList.display();    
